@@ -58,6 +58,8 @@ public class DrivingAndLifting extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor leftDrive = null;
     private DcMotor rightDrive = null;
+    private DcMotor liftMotor = null;
+
 
     @Override
     public void runOpMode() {
@@ -69,11 +71,15 @@ public class DrivingAndLifting extends LinearOpMode {
         // step (using the FTC Robot Controller app on the phone).
         leftDrive  = hardwareMap.get(DcMotor.class, "leftDrive");
         rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
+        liftMotor = hardwareMap.get(DcMotor.class,  "liftMotor");
+
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
         leftDrive.setDirection(DcMotor.Direction.FORWARD);
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
+        liftMotor.setDirection(DcMotor.Direction.FORWARD);
+
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -86,6 +92,12 @@ public class DrivingAndLifting extends LinearOpMode {
             double leftPower;
             double rightPower;
 
+
+            final double liftPowerX = -1.0;
+            final double liftPowerY = -0.75;
+            final double liftPowerB = -0.50;
+            final double liftPowerA = 0.50;
+
             // Choose to drive using either Tank Mode, or POV Mode
             // Comment out the method that's not used.  The default below is POV.
 
@@ -95,6 +107,33 @@ public class DrivingAndLifting extends LinearOpMode {
             double turn  =  gamepad1.right_stick_x;
             leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
             rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
+
+
+            boolean isXpressed = false;
+            boolean isYpressed = false;
+            boolean isBpressed = false;
+            boolean isApressed = false;
+            isXpressed = gamepad1.x;
+            isYpressed = gamepad1.y;
+            isBpressed = gamepad1.b;
+            isApressed = gamepad1.a;
+
+
+            if (isXpressed) {
+                liftMotor.setPower(liftPowerX);
+            }
+            else if (isYpressed){
+                liftMotor.setPower(liftPowerY);
+            }
+            else if (isApressed){
+                liftMotor.setPower(liftPowerA);
+            }
+            else if (isBpressed){
+                liftMotor.setPower(liftPowerB);
+            }
+            else{
+                liftMotor.setPower(0.0);
+            }
 
             // Tank Mode uses one stick to control each wheel.
             // - This requires no math, but it is hard to drive forward slowly and keep straight.
