@@ -53,17 +53,16 @@ import com.qualcomm.robotcore.util.Range;
  */
 
 @TeleOp(name="TroTeleOP", group="Linear Opmode")
-@Disabled
 public class TrobotixTeleOP extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor leftDrive = null;
     private DcMotor rightDrive = null;
-    private DcMotor extenderin = null;
-    private Servo flipper = null;
-    private DcMotor chain = null;
-    private DcMotor extenderout = null;
+    //private DcMotor extenderin = null;
+    //private Servo flipper = null;
+    //private DcMotor chain = null;
+    //private DcMotor extenderout = null;
 
     @Override
     public void runOpMode() {
@@ -75,18 +74,18 @@ public class TrobotixTeleOP extends LinearOpMode {
         // step (using the FTC Robot Controller app on the phone).
         leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
         rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
-        extenderin  = hardwareMap.get(DcMotor.class, "extender");
-        extenderout = hardwareMap.get(DcMotor.class, "extender_out");
-        flipper = hardwareMap.get(Servo.class, "flipper");
-        chain  = hardwareMap.get(DcMotor.class, "chain");
+        //extenderin  = hardwareMap.get(DcMotor.class, "extender");
+        //extenderout = hardwareMap.get(DcMotor.class, "extender_out");
+        //flipper = hardwareMap.get(Servo.class, "flipper");
+        //chain  = hardwareMap.get(DcMotor.class, "chain");
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
-        leftDrive.setDirection(DcMotor.Direction.FORWARD);
-        rightDrive.setDirection(DcMotor.Direction.REVERSE);
-        chain.setDirection(DcMotor.Direction.FORWARD);
-        extenderin.setDirection(DcMotor.Direction.FORWARD);
-        extenderout.setDirection(DcMotor.Direction.REVERSE);
+        leftDrive.setDirection(DcMotor.Direction.REVERSE);
+        rightDrive.setDirection(DcMotor.Direction.FORWARD);
+        //chain.setDirection(DcMotor.Direction.FORWARD);
+        //extenderin.setDirection(DcMotor.Direction.FORWARD);
+        //extenderout.setDirection(DcMotor.Direction.REVERSE);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -102,7 +101,7 @@ public class TrobotixTeleOP extends LinearOpMode {
             // Choose to drive using either Tank Mode, or POV Mode
             // Comment out the method that's not used.  The default below is POV.
 
-            if (gamepad2.x) chain.setPower(0.95);
+            /*if (gamepad2.x) chain.setPower(0.95);
             else chain.setPower(0);
 
             if (gamepad2.left_bumper) extenderin.setPower(0.5);
@@ -115,6 +114,8 @@ public class TrobotixTeleOP extends LinearOpMode {
 
             if (gamepad2.a) flipper.setPosition(90);
             else if (gamepad2.b) flipper.setPosition(0);
+
+            */
 
             leftPower  = -gamepad1.left_stick_y;
             rightPower = -gamepad1.right_stick_y;
