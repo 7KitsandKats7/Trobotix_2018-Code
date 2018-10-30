@@ -19,7 +19,7 @@ public class BlueCraterDrive extends LinearOpMode8696 {
 
     // These constants define the desired driving/control characteristics
     // The can/should be tweaked to suite the specific robot drive train.
-    static final double DRIVE_SPEED = 0.9;     // Nominal speed for better accuracy.
+    static final double DRIVE_SPEED = 0.7;     // Nominal speed for better accuracy.
     static final double TURN_SPEED = 0.5;     // Nominal half speed for better accuracy.
 
     @Override
@@ -34,7 +34,9 @@ public class BlueCraterDrive extends LinearOpMode8696 {
 
         waitForStart();
 
-        encoderDrive(DRIVE_SPEED, 6, 6, 1.0);  // S1: Forward 47 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED, 6, 6, 1.0);
+        encoderDrive(DRIVE_SPEED, 6, 6, 2.0);
+        encoderDrive(DRIVE_SPEED, 6, 6, 3.0);
     }
     public void encoderDrive(double speed,
                              double leftInches, double rightInches,
